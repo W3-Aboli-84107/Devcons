@@ -1,42 +1,27 @@
 package com.example.app2;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText name;
-    EditText mobileno;
-    EditText Email;
-    EditText intime;
-    EditText outtime;
-
+    EditText name, mobileno, Email, intime, outtime;
     Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         name = findViewById(R.id.username);
         mobileno = findViewById(R.id.mobile);
@@ -45,20 +30,42 @@ public class MainActivity extends AppCompatActivity {
         outtime = findViewById(R.id.outtime);
         save = findViewById(R.id.submit);
 
-        save.setOnClickListener(v -> {
-            String mobilenumber = mobileno.getText().toString().trim();
-
-            if (mobilenumber.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
-            } else if (mobilenumber.length() != 10) {
-                Toast.makeText(MainActivity.this, "Enter Valid 10-Digit Number", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this, "Mobile Number: " + mobilenumber, Toast.LENGTH_LONG).show();
-            }
-        });
-
         intime.setOnClickListener(v -> showTimePicker(intime));
         outtime.setOnClickListener(v -> showTimePicker(outtime));
+
+        save.setOnClickListener(v -> {
+            String visitorName = name.getText().toString().trim();
+            String email = Email.getText().toString().trim();
+            String mobileNumber = mobileno.getText().toString().trim();
+            String inTime = intime.getText().toString().trim();
+            String outTime = outtime.getText().toString().trim();
+
+            // Validate
+            if (visitorName.isEmpty() || email.isEmpty() || mobileNumber.isEmpty() || inTime.isEmpty() || outTime.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Enter a valid email", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (mobileNumber.length() != 10 || !mobileNumber.matches("\\d{10}")) {
+                Toast.makeText(this, "Enter a valid 10-digit mobile number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Pass data using Intent
+            Intent intent = new Intent(MainActivity.this, SecondScreen.class);
+            intent.putExtra("visitorData",
+                    "Name: " + visitorName + "\n" +
+                            "Email: " + email + "\n" +
+                            "Mobile: " + mobileNumber + "\n" +
+                            "In Time: " + inTime + "\n" +
+                            "Out Time: " + outTime);
+            startActivity(intent);
+        });
     }
 
     private void showTimePicker(final EditText targetField) {
@@ -66,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 (TimePicker view, int hourOfDay, int minute1) -> {
                     String time = String.format("%02d:%02d", hourOfDay, minute1);
                     targetField.setText(time);

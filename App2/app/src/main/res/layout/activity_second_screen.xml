@@ -6,49 +6,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/background"
-    android:padding="24dp">
+    android:padding="24dp"
+    tools:context=".SecondScreen">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Visitor Info"
+        app:titleTextColor="@android:color/white"
+        app:logo="@drawable/add"
+        android:background="?attr/colorPrimary" />
 
-    <TextView
-        android:id="@+id/displayText"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/dataTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visitor Data Appears Here..."
+            android:textSize="18sp"
+            android:textColor="#F0E4E4"
+            android:gravity="start"
+            android:lineSpacingExtra="6dp" />
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#EDE9E9"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        android:text="Visitor Information will appear here..."
-        android:padding="20dp"
-         />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:weightSum="2">
 
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/purple"
+            android:layout_marginEnd="8dp"/>
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/cancel"
-        android:text="Cancel"
-        android:textSize="23sp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/purple"
-        android:layout_margin="35dp" />
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/submit"
-        android:text="Save"
-        android:textSize="23sp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/purple"
-        android:layout_margin="35dp" />
-
-
-
-
+        <Button
+            android:id="@+id/cancelbtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/purple"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
 
 </LinearLayout>
-
-
