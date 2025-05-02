@@ -11,12 +11,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText name, mobileno, Email, intime, outtime;
     Button save;
+
+    // Static list to store multiple visitor entries
+    public static ArrayList<Visitor> visitorList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             String inTime = intime.getText().toString().trim();
             String outTime = outtime.getText().toString().trim();
 
-            // Validate
+            // Validation
             if (visitorName.isEmpty() || email.isEmpty() || mobileNumber.isEmpty() || inTime.isEmpty() || outTime.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
@@ -56,14 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // Pass data using Intent
+            // Create and add visitor entry
+            Visitor visitor = new Visitor(visitorName, email, mobileNumber, inTime, outTime);
+            visitorList.add(visitor);
+
+            // Go to SecondScreen with the list
             Intent intent = new Intent(MainActivity.this, SecondScreen.class);
-            intent.putExtra("visitorData",
-                    "Name: " + visitorName + "\n" +
-                            "Email: " + email + "\n" +
-                            "Mobile: " + mobileNumber + "\n" +
-                            "In Time: " + inTime + "\n" +
-                            "Out Time: " + outTime);
+            intent.putExtra("visitorDataList", visitorList);
             startActivity(intent);
         });
     }

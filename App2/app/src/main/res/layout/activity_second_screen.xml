@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,64 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     android:background="@drawable/background"
-    android:padding="24dp"
     tools:context=".SecondScreen">
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="Visitor Info"
-        app:titleTextColor="@android:color/white"
-        app:logo="@drawable/add"
-        android:background="?attr/colorPrimary" />
+        app:titleTextColor="@android:color/white" />
 
-    <ScrollView
+
+    <TextView android:id="@+id/nameTextView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:text="Name:" />
 
-        <TextView
-            android:id="@+id/dataTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Visitor Data Appears Here..."
-            android:textSize="18sp"
-            android:textColor="#F0E4E4"
-            android:gravity="start"
-            android:lineSpacingExtra="6dp" />
-    </ScrollView>
+
+
+    <TextView android:id="@+id/emailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="Email:" />
+
+    <TextView android:id="@+id/mobileTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="Mobile:" />
+
+    <TextView android:id="@+id/inTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="In Time:" />
+
+    <TextView android:id="@+id/outTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="Out Time:" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVisitors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:clipToPadding="false"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:weightSum="2">
+        android:layout_marginTop="16dp">
 
         <Button
-            android:id="@+id/backButton"
-            android:layout_width="0dp"
+            android:id="@+id/prevButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Back"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/purple"
-            android:layout_marginEnd="8dp"/>
+            android:text="Previous" />
 
         <Button
-            android:id="@+id/cancelbtn"
-            android:layout_width="0dp"
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancel"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/purple"
-            android:layout_marginStart="8dp"/>
+            android:text="Next"
+            android:layout_marginStart="16dp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/purple"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
+

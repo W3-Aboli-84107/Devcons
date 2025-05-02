@@ -2,50 +2,71 @@ package com.example.app2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
+import android.app.AlertDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class SecondScreen extends AppCompatActivity {
 
-    TextView dataTextView;
-    Button backButton, cancelButton;
+    Toolbar toolbar;
+    Button cancelButton;
+    RecyclerView recyclerView;
+    VisitorAdapter visitorAdapter;
+    ArrayList<Visitor> visitorList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_screen);
 
-        dataTextView = findViewById(R.id.dataTextView);
-        backButton = findViewById(R.id.backButton);
-        cancelButton = findViewById(R.id.cancelbtn);
+        // Initialize the toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        String visitorData = getIntent().getStringExtra("visitorData");
-        dataTextView.setText(visitorData != null ? visitorData : "No data received.");
+        // Initialize the cancel button
+        cancelButton = findViewById(R.id.cancelButton);
+        recyclerView = findViewById(R.id.recyclerViewVisitors);
 
-        backButton.setOnClickListener(v -> finish());
+        // Set up RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cancelButton.setOnClickListener(v -> finish()); // Or implement additional logic
-    }
+        // Initialize the list and adapter
+        visitorList = new ArrayList<>();
+        visitorAdapter = new VisitorAdapter(visitorList);
+        recyclerView.setAdapter(visitorAdapter);
 
-    public boolean onCreateOptionenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-      return true;
-    }
+        // Set the cancel button listener with a confirmation dialog
+        cancelButton.setOnClickListener(v -> {
+            // Show confirmation dialog
+            new AlertDialog.Builder(SecondScreen.this)
+                    .setTitle("Cancel")
+                    .setMessage("Are you sure you want to cancel?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // If user clicks 'Yes', go back to MainActivity
+                        startActivity(new Intent(SecondScreen.this, MainActivity.class));
+                        finish();
+                    })
+                    .setNegativeButton("No", null) // If 'No', just close the dialog
+                    .show();
+        });
 
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (item.getItemId() == R.id.add)
-        {
-            Intent intent = new Intent(SecondScreen.this, MainActivity.class);
-            startActivity(intent);
-            return true;
+        // Get the visitor data passed from MainActivity
+        Intent intent = getIntent();
+        ArrayList<Visitor> visitors = (ArrayList<Visitor>) intent.getSerializableExtra("visitorDataList");
+
+        // If there are visitors, display them
+        if (visitors != null && !visitors.isEmpty()) {
+            visitorList.addAll(visitors);
+            visitorAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(this, "No visitor data available", Toast.LENGTH_SHORT).show();
         }
-        return super.onOptionsItemSelected(item);
     }
 }
-

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/add"
-        android:title="Add"
-        android:icon="@drawable/add"
-        app:showAsAction="always"
 
-    />
+    <!-- Add item to show "+" icon for adding visitor -->
+    <item
+        android:id="@+id/action_add"
+        android:title="Add Visitor"
+        android:icon="@drawable/addlogo"
+        app:showAsAction="ifRoom|withText"/> <!-- Make sure ic_add is the name of your drawable -->
+
 </menu>

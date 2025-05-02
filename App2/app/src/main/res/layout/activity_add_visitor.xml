@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/visitor_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visitor Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/visitor_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visitor Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/visitor_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visitor Mobile"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/visitor_intime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visitor In Time"
+        android:inputType="datetime" />
+
+    <EditText
+        android:id="@+id/visitor_outtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visitor Out Time"
+        android:inputType="datetime" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+</LinearLayout>
