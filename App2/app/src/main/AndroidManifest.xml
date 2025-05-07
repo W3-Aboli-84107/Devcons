@@ -15,6 +15,9 @@
         <activity
             android:name=".AddVisitorActivity"
             android:exported="false" />
+
+        <activity android:name=".VisitorDetailActivity" />
+
         <activity
             android:name=".SecondScreen"
             android:exported="false"

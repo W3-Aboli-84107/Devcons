@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Visitor Name -->
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textSize="18sp" />
+
+    <!-- Visitor Email -->
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="18sp" />
+
+    <!-- Visitor Phone -->
+    <EditText
+        android:id="@+id/editPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        android:textSize="18sp" />
+
+    <!-- Visitor In Time -->
+    <EditText
+        android:id="@+id/editInTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="In Time"
+        android:textSize="18sp" />
+
+    <!-- Visitor Out Time -->
+    <EditText
+        android:id="@+id/editOutTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Out Time"
+        android:textSize="18sp" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textSize="16sp" />
+</LinearLayout>

@@ -10,14 +10,21 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText name, mobileno, Email, intime, outtime;
     Button save;
+
+    RecyclerView recyclerView;
+
+    VisitorAdapter adapter;
+
 
     // Static list to store multiple visitor entries
     public static ArrayList<Visitor> visitorList = new ArrayList<>();
@@ -71,17 +78,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showTimePicker(final EditText targetField) {
-        final Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                (TimePicker view, int hourOfDay, int minute1) -> {
-                    String time = String.format("%02d:%02d", hourOfDay, minute1);
-                    targetField.setText(time);
-                },
-                hour, minute, true);
-        timePickerDialog.show();
-    }
+
+
 }
+
